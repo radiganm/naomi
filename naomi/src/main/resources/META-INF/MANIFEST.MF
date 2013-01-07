@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1356164882035
+Build-Jdk: 1.6.0_33
+Built-By: mac
+Bundle-Activator: org.radigan.naomi.service.SystemActivator
+Bundle-ManifestVersion: 2
+Bundle-Name: NAOMI
+Bundle-SymbolicName: org.radigan.naomi
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.radigan.naomi.service;version="1.0.0.SNAPSHOT",org.apache.karaf.branding;version="1.0.0.SNAPSHOT"
+Import-Bundle: 
+Import-Package: 
+Main-Class: org.radigan.system.tools.Command
+SPI-Provider: org.radigan.*
+Spring-Context: *;public-context:=false
+Tool: Bnd-1.50.0

@@ -1,0 +1,21 @@
+#!/bin/bash
+## @file     naomi
+## @author   Mac Radigan
+dir=${0%/*}
+file=${0##*/}
+export NAOMI_HOME=$dir/..
+name=naomi
+lib=/opt/sbin/hdf5/lib
+jlp=/opt/sbin/hdf5/java/lib/macosx:$lib
+cp=$lib/jhdf5.jar
+jar=`find $dir/../.. -name "${name}*.jar" | head -n 1`
+#jar=`find $dir/../lib -name "${name}*.jar"`
+cmd="java -cp $cp -Djava.library.path=$jlp -jar $jar"
+case "$file" in
+  naomi) $cmd $* ;;
+  *)     
+     echo $cmd $file $*
+     $cmd $file $* 
+  ;;
+esac
+## *EOF*

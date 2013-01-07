@@ -1,0 +1,6 @@
+## Service Provider List for org.radigan.system.tools.AbstractTool
+## Mac Radigan
+org.radigan.system.interpreter.ScriptTool
+#org.radigan.system.interpreter.ClojureTool
+org.radigan.system.test.TestTool
+## *EOF*

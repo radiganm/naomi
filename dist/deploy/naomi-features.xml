@@ -1,0 +1,8 @@
+<!-- naomi-featues.xml -->
+<!-- Mac Radigan -->
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+  <feature name="naomi" version="1.0.0">
+    <bundle>mvn:org.radigan/naomi/1.0.0-SNAPSHOT</bundle>
+  </feature>
+</features>
+<!-- *EOF* -->

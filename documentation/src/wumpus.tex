@@ -1,0 +1,380 @@
+%% naoimi.tex
+%% Mac Radigan
+\documentclass{article}[11pt]
+%\documentclass{report}
+\setcounter{secnumdepth}{7}
+%\usepackage{draftcopy}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\usepackage{setspace}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in,nohead]{geometry}
+\usepackage{graphicx,amssymb,amstext,amsmath,amsthm,caption,mathtools}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{csvtools}
+\usepackage{pdftexcmds}
+\usepackage{listing}
+%\usepackage{minted}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{algpseudocode}
+%\usepackage[noend]{algpseudocode}
+\hypersetup{
+ colorlinks,
+ citecolor=blue,
+ filecolor=blue,
+ linkcolor=blue,
+ urlcolor=blue
+}
+\usepackage{titlesec}
+%\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{}{}
+%\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{1em}{}
+\bibliographystyle{IEEEtran}
+\newcommand\Quote[1]{\lq\textsl{#1}\rq}
+\newcommand\fr[2]{{\textstyle\frac{#1}{#2}}}
+\newcommand{\ssection}[1]{\section[#1]{\centering\normalfont\scshape #1}}
+\newcommand{\ssubsection}[1]{\subsection[#1]{\raggedright\normalfont\itshape #1}}
+%\addto{\normalsize}{\setlength{\abovedisplayskip}{20ex}}
+
+\begin{document}
+
+\title{Workflow Unified as a single Matrix for Processing Unlimited Services (WUMPUS)}
+\author{Mac Radigan}
+\date{} % comment this out if you would like to include the date
+\doublespacing
+
+\maketitle
+
+\begin{abstract}\centering
+...
+\end{abstract}
+
+\tableofcontents
+\listofalgorithms
+%\listoffigures
+\newpage
+
+\section{Introduction}
+
+\section{Workflow Unified as a single Matrix for Processing Unlimited Services (WUMPUS)}
+%
+% \begin{minted}[mathescape,
+%                linenos,
+%                numbersep=5pt,
+%                gobble=2,
+%                frame=lines,
+%                framesep=2mm]{java}
+% // # workflow productions
+% // # raw data services
+% // $\{d_{y_11}, d_{y_21}, \cdots, d_{y_Q1}\} = \rho_{1}\left(\right)$ # inputs to raw services are implicit (source)
+% // $\{d_{y_12}, d_{y_22}, \cdots, d_{y_Q2}\} = \rho_{2}\left(\right)$ # inputs to raw services are implicit (source)
+% // $\vdots$
+% // # intermediate services
+% // $\{d_{y_1k}, d_{y_2k}, \cdots, d_{y_Qk}\} = \rho_{k}\left(\{d_{x_1k}, d_{x_2k}, \cdots, d_{x_Pk}\}\right)$ 
+% // $\{d_{y_1k+1}, d_{y_2k+1}, \cdots, d_{y_Qk+1}\} = \rho_{k+1}\left(\{d_{x_1k+1}, d_{x_2k+1}, \cdots, d_{x_Pk+1}\}\right)$ 
+% // $\vdots$
+% // # final service
+% // $\{d_{f_1M}, d_{f_2M}, \cdots, d_{f_QM}\} = \rho_{M}\left(\{d_{x_1M}, d_{x_2M}, \cdots, d_{x_PM}\}\right)$ # this is the prototype service (sink)
+% \end{minted}
+%
+\begin{verbatim}
+# workflow productions
+# raw data services
+\end{verbatim}
+$\{d_{y_11}, d_{y_21}, \cdots, d_{y_Q1}\} = \rho_{1}\left(\right)$ \# inputs to raw services are implicit (source)
+\newline
+$\{d_{y_12}, d_{y_22}, \cdots, d_{y_Q2}\} = \rho_{2}\left(\right)$ \# inputs to raw services are implicit (source)
+\newline
+$\vdots$
+\begin{verbatim}
+# intermediate services
+\end{verbatim}
+$\{d_{y_1k}, d_{y_2k}, \cdots, d_{y_Qk}\} = \rho_{k}\left(\{d_{x_1k}, d_{x_2k}, \cdots, d_{x_Pk}\}\right)$ 
+\newline
+$\{d_{y_1k+1}, d_{y_2k+1}, \cdots, d_{y_Qk+1}\} = \rho_{k+1}\left(\{d_{x_1k+1}, d_{x_2k+1}, \cdots, d_{x_Pk+1}\}\right)$ 
+\newline
+$\vdots$
+\begin{verbatim}
+# final service
+\end{verbatim}
+$\{d_{f_1M}, d_{f_2M}, \cdots, d_{f_QM}\} = \rho_{M}\left(\{d_{x_1M}, d_{x_2M}, \cdots, d_{x_PM}\}\right)$ \# this is the prototype service (sink)
+\newline
+%
+Thus, each production is a map $f \colon \mathbf{P} \times \mathbf{D}^P \mapsto \mathbf{D}^Q$.  We may re-write the productions as follows:
+\newline
+\begin{equation}
+\begin{split}
+\left( \{d_{y_11}, d_{y_21}, \cdots, d_{y_Q1}\} \right) & \leftarrow \left( \rho_{1}, \{\epsilon\} \right) \\
+\left( \{d_{y_12}, d_{y_22}, \cdots, d_{y_Q2}\} \right) & \leftarrow \left( \rho_{2}, \{\epsilon\} \right) \\
+& \vdots \\
+\left( \{d_{y_1k}, d_{y_2k}, \cdots, d_{y_Qk}\} \right) & \leftarrow \left( \rho_{k}, \{d_{x_1k}, d_{x_2k}, \cdots, d_{x_Pk}\} \right) \\
+\left( \{d_{y_1k+1}, d_{y_2k+1}, \cdots, d_{y_Qk+1}\} \right) & \leftarrow \left( \rho_{k+1}, \{d_{x_1k+1}, d_{x_2k+1}, \cdots, d_{x_Pk+1}\} \right) \\
+& \vdots \\
+\left( \{d_{f_1M}, d_{f_2M}, \cdots, d_{f_QM}\} \right) & \leftarrow \left( \rho_{M}, \{d_{x_1M}, d_{x_2M}, \cdots, d_{x_PM}\} \right) 
+\end{split}
+\label{eq:productionList}
+\end{equation}
+\newline
+%
+From the workflow productions we can populate an oriented degree incident matrix, $\mathbb{W}$, having a row for each service, and a column for each Datatype connection between services.  Entries at row i and column j are positive if the $i^{th}$ service takes the $j^{th}$ Datatype as input, and negative if it is an output.  The magnitude of the entry is 1 times the degree of input/output files of the given type.
+\newpage
+\begin{table}
+\centering
+\begin{tabular}{1|1 1 1 1}
+\toprule
+$\mathbb{W}$ & d_{0} & d_{1} & \cdots & d_{N} \\
+\hline
+\rho{}_{0} & \omega_{1,1}    & \cdots                 & \cdots                 & \omega_{1,N} \\
+\rho{}_{1} & \vdots          & \omega_{m,n}           & \reflectbox{$\ddots$}  & \vdots \\
+\vdots     & \vdots          & \reflectbox{$\ddots$}  & \ddots                 & \vdots \\
+\rho{}_{M} & \omega_{M,1}    & \cdots                 & \cdots                 & \omega_{M,N} \\
+\bottomrule
+\end{tabular}
+\caption{Service Production Oriented Incidence Matrix}
+\label{tbl:productionMatrix}
+\end{table}
+%
+\begin{equation}
+\omega_{m,n} =
+\begin{cases}
+-$\alpha$, & \text{if }x = \rho_{m}\left(f_{n}, \cdots\right) \exists x \in \mathbb{D} \mbox{ $\{$ i.e. the file $d_n$ is an input to $\rho{}_m$ with multiplicity $\alpha$ $\}$ } \\
++$\alpha$, & \text{if }d_{n} = \rho_{m}\left(x, \cdots\right) \exists x \in \mathbb{D} \mbox{ $\{$ i.e. the file $d_n$ is an output of $\rho{}_m$ with multiplicity $\alpha$ $\}$ } \\
+ 0, & \text{otherwise}
+\end{cases}
+\label{eq:productionCode}
+\end{equation}
+%
+Taking the $sign$ of the matrix we have an ordinary oriented incident matrix, $\mathbb{W}_{u}$.
+\begin{equation}
+\centering
+\mathbb{W}_{u} = signum\left(\mathbb{W}\right)
+\label{eq:incidentMatrix}
+\end{equation}
+\newline
+%
+We will define the notation $\mathbb{M}\left(i|j\right)}$ to indicate a submatrix of $\mathbb{M}$ having the $i^{th}$ row and $j^{th}$ column removed.  We can then identify the potential starting services matrix, $\mathbb{S}$, as the rows of $\mathbb{W}_{u}$ those which do have any inputs, as shown below.
+%
+\begin{equation}
+\begin{array}{ll} 
+\mathbb{S} = \mathbb{W}_{u}\left(|j\right) & \mbox{where } j = \{ x | x \in \mathbb{W}_{u} \land \min(\mathbb{W}_{u})=1 \} \\
+\end{array}
+\label{eq:intermediateMatrix}
+\end{equation}
+%
+We will designate the final (prototype) service $\mathbb{F}$, and specify that it is known at the time of static analysis.
+\newline
+Now identify the intermediate services $\mathbb{P}$ knowing that $Intermediate = All \setminus \left( Starting \cup Final \right) $.
+%
+\begin{equation}
+\begin{array}{ll} 
+\mathbb{P} = \mathbb{W}_{u}\left(|j\right) & \mbox{where } j = \{ x | x \in \mathbb{W}_{u} \land \min(\mathbb{W}_{u})=1 \lor \max(\mathbb{W}_{u})=-1 \} \\
+\end{array}
+\label{eq:startingMatrix}
+\end{equation}
+%
+We have thus partitioned $\mathbb{W}_{u}$ into a starting submatrix, $\mathbb{S}$ intermediate submatrix, $\mathbb{P}$ final submatrix, $\mathbb{F}$.
+%
+\begin{equation}
+\mathbb{W}_{u} = \left[
+\begin{array}{c} 
+\mathbb{S} \\ \hline
+\mathbb{P} \\ \hline
+\mathbb{F}
+\end{array}
+\right]
+\label{eq:intermediateMatrix}
+\end{equation}
+%
+The Laplacian matrix is the product of an oriented incident matrix, say $\mathbb{M}$,  and its transpose.  Note that this matrix is Hermitian, which is a property we will exploit in the numerical computation of eigenvalues.
+\begin{equation}
+\mathbb{L} = \mathbb{M}\mathbb{M}^{\intercal}
+\label{eq:laplacianMatrix}
+\end{equation}
+We can determine if all nodes within a submatrix of an oriented incident matrix is connected from its algebraic connectivity.  The second eigenvalue of the Laplacian matrix of a subgraph is the algebraic connectivity, and thus the subgraph is connected if the second eigenvalue is greater than zero.  
+\begin{equation} 
+\Delta_{\mathbb{L}}\left(s\right) = | s\mathbb{I} - \mathbb{L} |
+\label{eq:characteristicPolynomial}
+\end{equation}
+\begin{equation} 
+\underline{\lambda} = \Delta_{\mathbb{L}}\left(0\right)
+\label{eq:eigenvalues}
+\end{equation}
+\begin{equation} 
+\lambda_{2} > 0 \Leftrightarrow \mbox{connected}
+\label{eq:eigenvalues}
+\end{equation}
+%
+\begin{algorithm}
+\caption{Connected}
+\label{alg:connected}
+\Function{connected}{$\mathbb{M}$}
+  \State \Comment{Create the Laplacian matrix}
+  \State $\mathbb{L} = \mathbb{M} \times \mathbb{M}^{\intercal}$
+  \State \Comment{Solve for the eigenvalues}
+  \State $\underline{\lambda} = $\Call{eigW}{$\mathbb{L}$}
+  \If{$\lambda_{2}>0$}
+    \State \Comment{The second eigenvalue is the algebraic connectivity}
+    \State \Return{True}
+  \Else
+    \State \Return{False}
+  \EndIf
+\EndFunction
+\end{algorithm}
+\newline
+We may exploit the fact that our Laplacian matrix is Hermitian, and use Kung's Algorithm for \mathbb{QR} factorization (qrDecomp).  We may then use the \mathbb{QR} Algorithm (eigW) to compute the eigenvalues of the Laplacian matrix.
+\newline
+To support Kung's Algorithm, we introduce a notation for transvections, $T_{i,j}^{N}\left(x\right)$.  The transvection is an $N \times N$ matrix with ones along the diaginal, the value $x$ at row $i$ and column $j$, and zeros elsewhere.
+%
+\begin{equation}
+\centering
+\mathbb{T}_{i,j}^{N}\left(x\right) = \mathbb{I}_{N} + x\mathbb{E}_{i,j}
+\label{eq:transvection}
+\end{equation}
+%
+Kung's \mathbb{QR} Algorithm then computes a strictly positive diagonalization matrix, $\mathbb{E}$, and resultant diagonal matrix $\mathbb{D}$.  We define $\mathbb{C} = \sqrt{\mathbb{D}}$, and can write the factorization of a matrix $\mathbb{M}_{N \times N}$ as follows.
+\begin{equation}
+\centering
+\mathbb{E} = \displaystyle{\prod_{i=1}^{N}} \displaystyle{\prod_{j \not= i}T_{i,j}^{N}\left(\mathbb{M}_{i,j}\right)^{*}}
+\label{eq:qrDecompE}
+\end{equation}
+\begin{equation}
+\centering
+\mathbb{D} = \left(\mathbb{EM}\right)^{*}\left(\mathbb{ME}\right) = \mathbb{E}^{*}\mathbb{M}^{*}\mathbb{M}\mathbb{E}
+\label{eq:qrDecompD}
+\end{equation}
+\begin{equation}
+\centering
+\mathbb{C} = \sqrt{\mathbb{D}}
+\label{eq:qrDecompC}
+\end{equation}
+\begin{equation}
+\centering
+\mathbb{Q} = \mathbb{A}\mathbb{E}\mathbb{C}^{-1}
+\label{eq:qrDecompQ}
+\end{equation}
+\begin{equation}
+\centering
+\mathbb{R} = \mathbb{C}\mathbb{E}^{-1}
+\label{eq:qrDecompR}
+\end{equation}
+\newline
+
+\begin{algorithm}
+\caption{Transvection}
+\label{alg:transvection}
+\Function{transvection}{$\mathbb{M}_{N \times N},i,j$}
+  \State \Comment{Initialize an identity matrix}
+  \State allocate $\mathbb{T}_{N \times N} \gets 0$
+  \For{$k \gets 1 \ldots N$}
+    \State $\mathbb{T}_{k,k} \gets 1$
+  \EndFor
+  \State \Comment{Conjugate and copy at i,j}
+  \State $\mathbb{T}_{i,j} \gets \mathbb{M}_{i,j}^{*}$
+  \State \Comment{Return the transvection}
+  \State \Return $\mathbb{T}$
+\EndFunction
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Kung's Algorithm}
+\label{alg:qrDecomp}
+\Function{qrDecomp}{$\mathbb{M}_{N \ times N}$}
+  \State \Comment{Initialize an identity matrix}
+  \State allocate $\mathbb{E}_{N \times N} \gets 0$
+  \For{$k \gets 1 \ldots N$}
+    \State $\mathbb{E}_{k,k} \gets 1$
+  \EndFor
+  \State \Comment{Create the diagonalizer by applying conjugate pairs of transvections to remove off-diagonal elements}
+  \For{$i \gets 1 \ldots N$}
+    \For{$j \gets 1 \ldots N$}
+      \If{$i \not= j$}
+        \State $\mathbb{E} = \mathbb{E} \cdot \Call{Transvection}{\mathbb{M},i,j}$
+      \EndIf
+    \EndFor
+  \EndFor
+  \State \Comment{Apply the diagonalizer to create the diagonalization}
+  \State $\mathbb{D} \gets \mathbb{E}^{*}\mathbb{M}^{*}\mathbb{M}\mathbb{E}$
+  \State $\mathbb{C} \gets \sqrt{\mathbb{D}}$
+  \State \Comment{Compute the $\mathbb{Q}$ and $\mathbb{R}$ matrices}
+  \State $\mathbb{Q} \gets \mathbb{A}\mathbb{E}\mathbb{C}^{-1}$
+  \State $\mathbb{R} \gets \mathbb{C}\mathbb{E}^{-1}$
+  \State \Comment{Return the orthogonal and upper triangular decomposition}
+  \State \Return $\mathbb{Q}, \mathbb{R}$
+\EndFunction
+\end{algorithm}
+
+The \mathbb{QR} Algorithm iteratively computes the eigenvalues of a matrix using a \mathbb{QR} decomposition.  The algorithm converges when the elements in the subdiagonal approach zero.
+
+\begin{algorithm}
+\caption{QR Algorithm}
+\label{alg:eigW}
+\Function{eigW}{$\mathbb{A}^{N \times N}_0$}
+  \State \Comment{Set the initial conditions}
+  \State $k \gets 0$
+  \State \mathbb{Q}_0, \mathbb{R}_0 \gets \Call{$qrDecomp$}{$\mathbb{A}_0$}
+  \State \Comment{Iterate until the subdiagonal converges to zero}
+  \While{$ \mathbb{A}_{k_{i,j}} < \epsilon, \forall j=i-1 \forall i \in 1 \ldots N$ }
+    \State $k \gets k+1$
+    \State $\mathbb{Q}_{k-1}, \mathbb{R}_{k-1} \gets \Call{qrDecomp}{\mathbb{A}_{k-1}}$
+    \State $\mathbb{A}_{k} \gets \mathbb{R}_{k-1}\mathbb{Q}_{k-1}$
+  \EndWhile
+  \State \Comment{Create a vector from the diagonal elements of $\mathbb{A}_k$}
+  \State $\underbar{\lambda} \gets \{ a_{i,j} | \forall a_{i,j} \in \mathbb{A}_k \land i=j \} }$
+  \State \Comment{Return eigenvalues}
+  \State \Return $\underbar{\lambda}$
+\EndFunction
+\end{algorithm}
+
+\newpage
+\paragraph{Workflow Execution}
+%\par
+\begin{algorithm}
+\caption{On File Processed $\mathbf{CONCURRENT}$}
+\label{alg:executeDependency}
+\Procedure{onFileProcessed}{fileset, parameters}
+  \State \Comment{Compute the state vector}
+  \State $\underbar{\mathbb{Z}}_k \gets \Call{stateVector}{fileset}$
+  \State \Comment{Compute the state change}
+  \State $\Delta\underbar{\mathbb{Z}}_k \gets \underbar{\mathbb{Z}}_k - \underbar{\mathbb{Z}}_{k-1}$
+  \State \Comment{Identify the production candidates}
+  \State $\underbar{\mathbb{\alpha}}_k \gets \mathbb{W}^{+}\underbar{\mathbb{Z}}_k \oplus \Sigma\mathbb{W}^{+}$
+  \State \Comment{Filter the production candidates to yeild the production set}
+  \State $\underbar{\mathbb{\rho}} \gets \underbar{\mathbb{\alpha}}_{k} \oplus \Call{sign}{\mathbb{W}^{+}\underbar{\mathbb{Z}}_k}$
+  \ForAll{$\rho \in \underbar{\rho}$}
+    \State \Comment{Create the input file set}
+    \State $\underbar{\mathbb{X}} \gets \mbox{ fileset}\left(\mathbb{W}^{+}_{\underbar{\rho},*}\right)$
+    \State \Comment{Call each service in the production set}
+    \State fileset.push \Call{$\rho$}{$fileset, parameters$} 
+  \EndFor
+\EndProcedure
+\end{algorithm}
+%
+The workflow is executed using the $executeWorkflow\left(\right)$ algorithm.
+%
+\begin{algorithm}
+\caption{Execute Workflow}
+\label{alg:executeWorkflow}
+\Procedure{executeWorkflow}{fileList, parameters}
+  \ForAll{$file \in fileList$ \mathbf{ IN PARALLEL}}
+    \ForAll{$\rho \in rows(\mathbb{S})$}
+      \State \Comment{Construct the augmented graph with starting service (source) $\rho$}
+      \State $\mathbb{M} = \left[ \begin{array}{c} \rho \\ \hline \mathbb{P} \\ \hline \mathbb{F} \end{array} \right]$
+      \If{\Call{connected}{$\mathbb{M}$} and \Call{$\rho.canCreate$}{x} }
+        \State fileset.push \Call{$\rho$}{$file, parameters$} 
+      \EndIf
+    \EndFor
+  \EndFor
+\EndProcedure
+\end{algorithm}
+
+\section{Summary}
+
+%\section{Appendix A: Algorithms}
+%\section{Appendix B: Worked Exercises with Solutions}
+
+\newpage
+\bibliography{IEEEabrv,bibliography}
+
+\end{document}
+%% *EOF*

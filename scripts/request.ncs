@@ -1,0 +1,10 @@
+// request.ncs
+// Mac Radigan
+
+def path = "/roar/abc.xml"
+def matcher = path =~ /\/roar\/([A-z][A-z0-9]*)\.(xml|xsd|xsl|xhtml)/
+if(!matcher.matches()) throw new IllegalArgumentException("Bad request")
+def algo = matcher[0][1]
+println "algo: ${algo}"
+
+// *EOF*

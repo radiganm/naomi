@@ -1,0 +1,40 @@
+// wumpusutil.ncs
+// Mac Radigan
+
+import org.radigan.naomi.wumpus.impl.SimulationFunctor as F
+import org.radigan.naomi.wumpus.utilities.WumpusUtil as Util
+import java.util.concurrent.atomic.AtomicIntegerArray
+import org.radigan.system.utilities.MatrixImpl
+
+def fn = []
+fn << new F('p1', ['d1'],           [],               ['a1','a2','a3'])
+fn << new F('p2', ['d2','d3','d3'], ['d1'],           ['a1','a2','a3'])
+fn << new F('p3', ['d4'],           ['d2','d3','d3'], ['a1','a2','a3'])
+fn << new F('p4', ['d5'],           ['d2'],           ['a1','a2','a3'])
+
+def wu = new Util(fn)
+println wu
+
+println "state vector"
+def sv = [
+  'd1':1,
+  'd2':2,
+  'd3':3,
+  'd4':0
+  ]
+//wu.execute(sv)
+
+def tp = []
+tp << Thread.start { println "a" }
+tp << Thread.start { println "b" }
+tp*.join()
+
+wu = wu.filter(2)
+println wu
+
+println "workflow:"
+wu.execute()
+
+println "\nsinks: ${wu.getSinks()}"
+
+// *EOF*

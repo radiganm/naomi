@@ -1,0 +1,11 @@
+// module.ncs
+// Mac Radigan
+
+import org.radigan.naomi.utilities.ServiceFactory
+import org.radigan.naomi.service.Module
+
+def serviceFactory = ServiceFactory.getInstance()
+def modules = serviceFactory.getModules()
+println "modules: ${modules}"
+
+// *EOF*

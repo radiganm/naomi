@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- wumpus.html -->
+<!-- Mac Radigan -->
+<% 
+  sources = util.getStart()
+  nodes = util.getNodes()
+  sinks = util.getSinks()
+  functors = nodes-sources-sinks
+  f = util.getFunctors()
+  edges = util.getEdges()
+  ename = edges['name']
+  ei = edges['in']
+  eo = edges['out']
+  fname = f[sinks[0]].getName()
+  namespace = f[sinks[0]].getNamespace()
+  qname = f[sinks[0]].getQname()
+  fn = f[sinks[0]]
+  wfid = util.getId()
+  getFunction = { f ->
+    def sb = new StringBuffer()
+    sb << "\\left(${f.getProducts().join(', ')}\\right)"
+    sb << "& \\leftarrow \\left( ${f.getQname()}, "
+    sb << "\\{ ${f.getDependencies().join(', ')} \\}, "
+    sb << "\\{ ${f.getParameters().join(', ')} \\}"
+    sb << "\\right)"
+    return sb.toString()
+  }
+  getMatrix = { m ->
+    def sb = new StringBuffer()
+    sb << "\\left["
+    sb << "\\begin{array}{c}"
+    m.getRowRange().eachWithIndex { row, rind ->
+      m.getColRange().eachWithIndex { col, cind ->
+        sb << "${(int)m.getEntry(rind,cind)}"
+        if(cind!=m.getCols()-1) sb << "&"
+      }
+      if(rind!=m.getRows()-1) sb << "\\\\"
+    }
+    sb << "\\end{array}"
+    sb << "\\right]"
+    return sb.toString()
+  }
+%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Workflow ${fname} (${namespace}) [${wfid}]</title>
+    <meta name="author" content="Mac Radigan">
+    <meta name="description" content="WUMPUS html interfae for ${fname} (${namespace}) [${wfid}]">
+    <meta name="keywords" content="WUMPUS ${namespace} ${fname} ${wfid}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
+      </script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <style>
+      h1 {
+         background: #CCCCCC;
+           padding: .2em 1em;
+             border-top: 3px solid #666666;
+               border-bottom: 3px solid #999999;
+      }
+      </style>
+  </head>
+  <body>
+    <center><h1>Workflow ${fname} (${namespace})</h1></center>
+    <div style="padding:0 2em">
+
+      <hr>
+        <center><img src="http://localhost:8080/roar/ns1/p3/interface/p3.gif" alt="${qname} workflow"/></center>
+      <p>
+
+      <hr>
+        Workflow:
+        \\begin{equation}
+          \\begin{split}
+<% nodes.each { n -> %> ${getFunction(f[n])} \\\\
+<% } %>
+          \\end{split}
+          \\label{eq:productions}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Name: ${fname}
+        <br>
+        Namespace: ${namespace}
+        <br>
+        Unique Id: ${wfid}
+        <br>
+        Products: ${fn.getProducts().join(", ")}
+        <br>
+        Dependencies: ${fn.getDependencies().join(", ")}
+        <br>
+        Parameters: ${fn.getParameters().join(", ")}
+        <br>
+        Algebraic Connectivity: ${util.getAlgebraicConnectivity()}
+        <br>
+      <p>
+
+    <center><h1>Workflow Unified as a single Martrix for Processing Unlimited Services (WUMPUS)</h1></center>
+
+      <hr>
+        Oriented Incident Matrix
+        \\begin{equation}
+          \\mathbb{W} = ${getMatrix(util.getWumpus())}
+          \\label{eq:W}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Unit Oriented Incident Matrix
+        \\begin{equation}
+          \\mathbb{W}_{u} = ${getMatrix(util.getWumpus())}
+          \\label{eq:Wu}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Laplacian
+        \\begin{equation}
+          \\mathbb{L} = ${getMatrix(util.getLaplacian())}
+          \\label{eq:L}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Degree
+        \\begin{equation}
+          \\mathbb{D} = ${getMatrix(util.getDegree())}
+          \\label{eq:D}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Adjacency
+        \\begin{equation}
+          \\mathbb{A} = ${getMatrix(util.getAdjacency())}
+          \\label{eq:A}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Positive Flux Adjacency
+        \\begin{equation}
+          \\mathbb{A}^{+} = ${getMatrix(util.getPositiveFlux())}
+          \\label{eq:Ap}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Negative Flux Adjacency
+        \\begin{equation}
+          \\mathbb{A}^{-} = ${getMatrix(util.getNegativeFlux())}
+          \\label{eq:An}
+        \\end{equation}
+      <p>
+
+      <hr>
+        Transitive Closure
+        \\begin{equation}
+          \\mathbb{C}^{*} = ${getMatrix(util.getTransitiveClosure())}
+          \\label{eq:C}
+        \\end{equation}
+      <p>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+## Service Provider List for org.radigan.naomi.service.Module
+## Mac Radigan
+org.radigan.naomi.wumpus.impl.SimulationFunctor
+org.radigan.naomi.roar.impl.InterfaceResource
+org.radigan.naomi.nyancat.impl.GraphvizReport
+## *EOF*
