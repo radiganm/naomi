@@ -1,5 +1,3 @@
-// GraphViz.dot 
-// Mac Radigan
 <% 
   sources = util.getStart()
   nodes = util.getNodes()
@@ -14,7 +12,11 @@
   fname = f[sinks[0]].getName()
   namespace = f[sinks[0]].getNamespace()
   qname = f[sinks[0]].getQname()
+  wfid = util.getId()
 %>
+// ${fname}.dot 
+// Mac Radigan
+// workflow: ${fname} (${namespace}) [${wfid}]
 digraph G {
  labelloc="t";
  label="Workflow ${fname} (${namespace})";

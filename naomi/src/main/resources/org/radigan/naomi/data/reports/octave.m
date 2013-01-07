@@ -29,32 +29,47 @@
 %>
 % ${fname}.m
 % Mac Radigan
+% workflow: ${fname} (${namespace}) [${wfid}]
+
+% storage
+w = {};
+% workflow id
+w{end+1}.wfid = '${wfid}';
+
+% products
+w{end}.products = {'${fn.getProducts().join("','")}'};
+
+% dependencies
+w{end}.dependencies = {'${fn.getDependencies().join("','")}'};
+
+% parameters
+w{end}.parameters = {'${fn.getParameters().join("','")}'};
 
 % algebraic connectivity
-ac = ${util.getAlgebraicConnectivity()};
+w{end}.ac = ${util.getAlgebraicConnectivity()};
 
 % Oriented Incident Matrix
-W = ${getMatrix(util.getWumpus())};
+w{end}.W = ${getMatrix(util.getWumpus())};
 
 % Unit Oriented Incident Matrix
-Wu = ${getMatrix(util.getWumpus())};
+w{end}.Wu = ${getMatrix(util.getWumpus())};
 
 % Laplacian
-L = ${getMatrix(util.getLaplacian())};
+w{end}.L = ${getMatrix(util.getLaplacian())};
 
 % Degree
-D = ${getMatrix(util.getDegree())};
+w{end}.D = ${getMatrix(util.getDegree())};
 
 % Adjacency
-A = ${getMatrix(util.getAdjacency())};
+w{end}.A = ${getMatrix(util.getAdjacency())};
 
 % Positive Flux Adjacency
-Ap = ${getMatrix(util.getPositiveFlux())};
+w{end}.Ap = ${getMatrix(util.getPositiveFlux())};
 
 % Negative Flux Adjacency
-An = ${getMatrix(util.getNegativeFlux())};
+w{end}.An = ${getMatrix(util.getNegativeFlux())};
 
 % Transitive Closure
-C = ${getMatrix(util.getTransitiveClosure())};
+w{end}.C = ${getMatrix(util.getTransitiveClosure())};
 
 % *EOF*
