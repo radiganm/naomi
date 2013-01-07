@@ -1,5 +1,7 @@
 # Normalized Algorithm Object Messsaging Interface (NAOMI)
 
+![NAOMI](https://raw.github.com/radiganm/naomi/master/documentation/src/images/naomi.jpg)
+
 ## Overview
 
 ## Components
