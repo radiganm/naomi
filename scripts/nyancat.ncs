@@ -1,0 +1,23 @@
+// nyancat.ncs
+// Mac Radigan
+
+import org.radigan.naomi.wumpus.service.SimulationFunctor as F
+import org.radigan.naomi.wumpus.utilities.WumpusUtil as Util
+import org.radigan.naomi.nyancat.impl.GraphvizReport
+
+def fn = []
+fn << new F('p1', ['d1'],           [],               ['a1','a2','a3'])
+fn << new F('p2', ['d2','d3','d3'], ['d1'],           ['a1','a2','a3'])
+fn << new F('p3', ['d4'],           ['d2','d3','d3'], ['a1','a2','a3'])
+fn << new F('p4', ['d5'],           ['d2'],           ['a1','a2','a3'])
+
+def wu = new Util(fn)
+wu = wu.filter(2)
+println wu
+
+def graph = new GraphvizReport(wu)
+graph.setFormat("gif")
+println graph.toString()
+graph.save("/Users/mac/temp/test.gif")
+
+// *EOF*

@@ -1,0 +1,9 @@
+// wumpus.ncs
+// Mac Radigan
+
+import org.radigan.naomi.wumpus.impl.WumpusImpl
+
+def wumpus = new WumpusImpl()
+println wumpus
+
+// *EOF*

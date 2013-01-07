@@ -1,0 +1,18 @@
+// @file     application.naomi
+// @author   Mac Radigan
+
+package org.radigan.naomi.modules
+
+import org.radigan.naomi.wumpus.service.FunctorList
+import org.radigan.naomi.wumpus.impl.SimulationFunctor as F
+
+public class ApplicationModule extends FunctorList {
+  public void initialize() {
+    this << new F('p1', ['d1'],           [],               ['a1','a2','a3'])
+    this << new F('p2', ['d2','d3','d3'], ['d1'],           ['a1','a2','a3'])
+    this << new F('p3', ['d4'],           ['d2','d3','d3'], ['a1','a2','a3'])
+    this << new F('p4', ['d5'],           ['d2'],           ['a1','a2','a3'])
+  }
+}
+
+// *EOF*

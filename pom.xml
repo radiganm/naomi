@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- pom.xml -->
+<!-- Mac Radigan -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.radigan.naomi</groupId>
+  <artifactId>root</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>NOAMI Project</name>
+  <url>http://radigan.org</url>   
+  <modules>
+    <module>naomi</module>
+  </modules>
+  <distributionManagement>
+    <repository>
+      <name>NAOMI</name>
+      <id>releases</id>
+      <url>http://naomi-2:8081/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+       <name>YCOA</name>
+       <uniqueVersion>false</uniqueVersion>
+      <id>snapshots</id>
+      <url>http://naomi-2:8081/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
+<!-- *EOF* -->

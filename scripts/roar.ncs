@@ -1,0 +1,12 @@
+// roar.ncs
+// Mac Radigan
+
+import org.radigan.naomi.roar.impl.RoarImpl
+
+def roar = new RoarImpl()
+
+roar.start()
+
+System.in.withReader { println "CRL+C to exit"; println it.readLine() } 
+
+// *EOF*

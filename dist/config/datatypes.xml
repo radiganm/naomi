@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<t:datatype xmlns:t="http://org.radigan.naomi/datatypes" name="Object" type="Root">
+  <t:datatype name="Foo" type="Object">
+    <t:datatype name="Bar" type="Foo">
+    </t:datatype>
+  </t:datatype>
+</t:datatype>

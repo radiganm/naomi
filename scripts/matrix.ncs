@@ -1,0 +1,86 @@
+// matrix.ncs
+// Mac Radigan
+
+import org.radigan.system.utilities.MatrixImpl
+
+double[][] data = [
+  [-1,  1,  0,  0],
+  [ 0, -1,  1,  0],
+  [ 0, -2,  2,  0],
+  [ 0,  0,  0,  0]
+]
+
+//  in=-1;                                 % flux direction, in
+//  Wu = sign(W);                          % oriented incident matrix, Wu
+//  L = Wu'*Wu;                            % Laplacian matrix, L
+//  A = abs(L.*(L<0));                     % adjacency matrix, A
+//  D = L+A;                               % degree matrix, D
+//  [i,j]=find(D); N=i(end);               % determine number of nodes
+//  k=1:N;                                 % submatrix indices, k
+//  s=zeros(size(A)); s(k,k)=diag(k)>0;    % submatrix diagonal, s
+//  C=(A+s)^N;                             % transitive closure, C
+//  lambda = flipud(sort(eig(L)));         % eigenvalues, lambda
+//  ac = lambda(2);                        % algebraic connectivity, ac
+//  con = ac>0;                            % check connectivity, con
+//  SS = find((min(Wu)<0)&(max(Wu)<-in));  % source nodes, SS
+//  S = find(C(SS,N));                     % starting nodes
+
+def W = new MatrixImpl(data)
+println "W:\n${W}"
+
+// oriented incident matrix, Wu = sign(W)
+def Wu = W.signum()
+println "Wu:\n${Wu}"
+
+// Laplacian matrix, L = Wu'*Wu
+def L = Wu.t()*Wu
+println "L:\n${L}"
+
+// adjacency matrix, A = abs(L.*(L<0))
+def A = (L**(L<<0)).abs()
+println "A:\n${A}"
+
+// degree matrix, D
+def D = L+A
+println "D:\n${D}"
+
+// determine number of nodes, N
+def N = D.lastNonzeroRow()
+println "N:\n${N}"
+println "\n"
+
+// transitive closure, C=(A+s)^N
+def sm = MatrixImpl.zeros(A).fill(MatrixImpl.eye(A))
+def C = (A+sm)^N
+println "C:\n${C}"
+
+// algebraic connectivity, ac = eigW(L, 2)
+def ac = L.eigW(1)
+println "ac:\n${ac}"
+println "\n"
+
+// check connectivity, con = ac>0
+def con = ac>0
+println "con:\n${con}"
+println "\n"
+
+// source nodes, SS
+//def SS = (Wu.min().lt(0) & Wu.max().lt(1)).find()
+def SS = ((Wu.min()<<0)&(Wu.max()<<1)).find()
+println "SS:\n${SS}"
+println "\n"
+
+// starting nodes, S
+def S = C.indToRows(C.find(SS,[N]))
+println "S:\n${S}"
+println "\n"
+
+// positive flux adjacency matrix, Ap = A.*(Wu>0)
+def Ap = A**(Wu>>0)
+println "Ap:\n${Ap}"
+
+// negative flux adjacency matrix, Ap = A.*(Wu<0)
+def An = A**(Wu<<0)
+println "An:\n${An}"
+
+// *EOF*

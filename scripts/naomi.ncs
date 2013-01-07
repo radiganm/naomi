@@ -1,0 +1,12 @@
+// naomi.ncs
+// Mac Radigan
+
+import org.radigan.naomi.impl.NaomiImpl
+
+def naomi = new NaomiImpl()
+
+naomi.start()
+
+System.in.withReader { println "CRL+C to exit"; println it.readLine() } 
+
+// *EOF*

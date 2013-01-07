@@ -1,0 +1,11 @@
+// config.ncs
+// Mac Radigan
+
+import org.radigan.naomi.utilities.ServiceFactory
+
+def serviceFactory = ServiceFactory.getInstance()
+def config = serviceFactory.getConfiguration()
+println "config: ${config}"
+println "port: ${config.roar.port}"
+
+// *EOF*

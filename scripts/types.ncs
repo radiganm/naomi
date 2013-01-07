@@ -1,0 +1,20 @@
+// types.ncs
+// Mac Radigan
+
+import org.radigan.naomi.impl.TypesDatabaseImpl as Db
+import org.radigan.naomi.utilities.TypeCategory
+
+def db = Db.getInstance()
+
+def file = new File("dist/config/datatypes.xml")
+db.parse(file.text)
+println db.toString()
+
+def t1 = "Foo"
+def t2 = "Bar"
+use(TypeCategory) {
+  println t1 in t2
+  println t2 in t1
+}
+
+// *EOF*

@@ -1,0 +1,15 @@
+#!/bin/bash
+## @file     install
+## @author   Mac Radigan
+dir=${0%/*}
+file=${0##*/}
+exes=(script test)
+for f in ${exes[@]}; do
+  (cd $dir; ln -fs naomi $f)
+done
+jars=`find $dir/../.. -name "*.jar"`
+mkdir -p $dir/../lib
+for f in $jars; do
+  (cd $dir/../lib; ln -fs $f .)
+done
+## *EOF*
