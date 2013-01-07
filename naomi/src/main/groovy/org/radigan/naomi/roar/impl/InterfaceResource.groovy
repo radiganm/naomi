@@ -6,6 +6,7 @@ package org.radigan.naomi.roar.impl
 import org.radigan.naomi.nyancat.service.Report
 import org.radigan.naomi.nyancat.impl.GraphvizReport
 import org.radigan.naomi.nyancat.impl.WumpusReport
+import org.radigan.naomi.nyancat.impl.OctaveReport
 import org.radigan.naomi.roar.service.Resource
 import org.radigan.naomi.roar.service.AbstractResource
 import org.radigan.naomi.wumpus.utilities.WumpusUtil
@@ -33,7 +34,7 @@ public class InterfaceResource extends AbstractResource {
     def map = [:]
     def path = uri.toString()
     if(path.startsWith("/roar/")) {
-      def matcher = path=~/\/roar\/([A-z][A-z0-9]*)\/([A-z][A-z0-9]*)\/([A-z]+)\/([A-z][A-z0-9]*)\.(gif|dot|xml|xsl|xsd|xhtml|html)/
+      def matcher = path=~/\/roar\/([A-z][A-z0-9]*)\/([A-z][A-z0-9]*)\/([A-z]+)\/([A-z][A-z0-9]*)\.(gif|dot|xml|xsl|xsd|xhtml|html|m)/
       if(matcher.matches()) {
         map['namespace'] = matcher[0][1]
         map['nameDir'] = matcher[0][2]
@@ -68,6 +69,9 @@ public class InterfaceResource extends AbstractResource {
           case ['html','xhtml']:
             res.getWriter().println(new WumpusReport(wf).toString())
             break
+          case 'm':
+            res.getWriter().println(new OctaveReport(wf).toString())
+            break
           case 'dot':
             res.getWriter().println(new GraphvizReport(wf).toString())
             break
@@ -88,15 +92,6 @@ public class InterfaceResource extends AbstractResource {
             def input = new FileInputStream(rptFile)
             IOUtils.copy(input, output)
             IOUtils.closeQuietly(output)
-            /*
-            byte[] buffer = new byte[2048]
-            int bytesRead
-            while ((bytesRead = input.read(buffer)) != -1) {
-              println "transferring: ${bytesRead}"
-              output.write(buffer, 0, bytesRead)
-            }
-            output.close()
-            */
             break
           default:
             throw new IllegalStateException("Invalid extension: ${map['ext']}")
