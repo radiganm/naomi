@@ -16,9 +16,14 @@
 
 ## Screenshots
 
+### Console Interface
 ![Karaf Console](https://raw.github.com/radiganm/naomi/master/screenshots/naomi-karaf-console.png "Karaf Console")
+### OSGi Compliant
 ![OSGi Bundles](https://raw.github.com/radiganm/naomi/master/screenshots/naomi-karaf-bundles.png "OSGi Bundles")
+### HTML Reporting
 ![WUMPUS Resource 1](https://raw.github.com/radiganm/naomi/master/screenshots/roar-wumpus-resource-p3-page1.png "RESTful HTML WUMPUS Resource (page 1 of 3)")
 ![WUMPUS Resource 2](https://raw.github.com/radiganm/naomi/master/screenshots/roar-wumpus-resource-p3-page2.png "RESTful HTML WUMPUS Resource (page 2 of 3)")
+### Octave/Matlab Compatibility
 ![Octave Resource](https://raw.github.com/radiganm/naomi/master/screenshots/roar-octave-resource-p3.png "RESTful Octave Resource")
+### Dependency Injection Scripting
 ![RUTH Dependency Injection](https://raw.github.com/radiganm/naomi/master/screenshots/ruth-dependency-injection.png "RUTH Dependency Injection")
