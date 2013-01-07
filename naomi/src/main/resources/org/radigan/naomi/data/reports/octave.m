@@ -54,22 +54,22 @@ w{end}.W = ${getMatrix(util.getWumpus())};
 % Unit Oriented Incident Matrix
 w{end}.Wu = ${getMatrix(util.getWumpus())};
 
-% Laplacian
+% Laplacian Matrix
 w{end}.L = ${getMatrix(util.getLaplacian())};
 
-% Degree
+% Degree Matrix
 w{end}.D = ${getMatrix(util.getDegree())};
 
-% Adjacency
+% Adjacency Matrix
 w{end}.A = ${getMatrix(util.getAdjacency())};
 
-% Positive Flux Adjacency
+% Positive Flux Adjacency Matrix
 w{end}.Ap = ${getMatrix(util.getPositiveFlux())};
 
-% Negative Flux Adjacency
+% Negative Flux Adjacency Matrix
 w{end}.An = ${getMatrix(util.getNegativeFlux())};
 
-% Transitive Closure
+% Transitive Closure Matrix
 w{end}.C = ${getMatrix(util.getTransitiveClosure())};
 
 % *EOF*
