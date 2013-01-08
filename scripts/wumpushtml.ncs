@@ -1,0 +1,50 @@
+// nyancat.ncs
+// Mac Radigan
+
+import org.radigan.naomi.wumpus.impl.SimulationFunctor as F
+import org.radigan.naomi.wumpus.utilities.WumpusUtil as Util
+import org.radigan.naomi.nyancat.impl.GraphvizReport
+import org.apache.commons.io.FileUtils
+
+def f = []
+// sources 01-09
+f << new F('p1',  ['d1','d2','d3','d4'], [],                             ['a1','a2','a3'])
+f << new F('p2',  ['d5'],                [],                             ['a1','a2','a3'])
+f << new F('p3',  ['d6'],                [],                             ['a1','a2','a3'])
+// functors A 11-19
+f << new F('p11', ['d11'],               ['d1','d2','d3','d4'],          ['a1','a2','a3'])
+f << new F('p12', ['d12'],               ['d5'],                         ['a1','a2','a3'])
+f << new F('p13', ['d13'],               ['d6'],                         ['a1','a2','a3'])
+// functors B 21-29
+f << new F('p21', ['d21'],               ['d11'],                        ['a1','a2','a3'])
+f << new F('p22', ['d22'],               ['d12'],                        ['a1','a2','a3'])
+f << new F('p23', ['d23'],               ['d13'],                        ['a1','a2','a3'])
+// sinks 31+
+f << new F('p31', ['d31'],               ['d21'],                        ['a1','a2','a3'])
+
+def wu = new Util(f)
+def ext = "gif"
+
+process = { name ->
+  def n = wu.getFunctorIndex(name, 'ns1')
+  def fn = f[n]
+  def wf = wu.filter(n as int)
+  println wf
+  def cacheDir = new File("/Users/mac/temp/cache")
+  def resDir = new File("${cacheDir}/${fn.getNamespace()}/${fn.getName()}/${wu.getId()}")
+  def rptFile = new File("${resDir}/${fn.getName()}.${ext}")
+  def report = new GraphvizReport(wf)
+  println report.toString()
+  if(!rptFile.exists()) {
+    FileUtils.forceMkdir(resDir)
+    report.save(rptFile, ext)
+    println report.toString()
+    println "file complete: ${rptFile}"
+  } else {
+    println "file exists: ${rptFile}"
+  }
+}
+
+['p31'].each { name -> process(name) }
+
+// *EOF*
