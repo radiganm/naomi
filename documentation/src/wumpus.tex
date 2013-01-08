@@ -1,4 +1,4 @@
-%% naoimi.tex
+%% wumpus.tex
 %% Mac Radigan
 \documentclass{article}[11pt]
 %\documentclass{report}
@@ -47,7 +47,7 @@
 \maketitle
 
 \begin{abstract}\centering
-...
+workflows that work
 \end{abstract}
 
 \tableofcontents
@@ -117,18 +117,18 @@ Thus, each production is a map $f \colon \mathbf{P} \times \mathbf{D}^P \mapsto 
 \end{equation}
 \newline
 %
-From the workflow productions we can populate an oriented degree incident matrix, $\mathbb{W}$, having a row for each service, and a column for each Datatype connection between services.  Entries at row i and column j are positive if the $i^{th}$ service takes the $j^{th}$ Datatype as input, and negative if it is an output.  The magnitude of the entry is 1 times the degree of input/output files of the given type.
+From the workflow productions we can populate an oriented degree incident matrix, $\mathbb{W}$, having a column for each service, and a row for each Datatype connection between services.  Entries at row i and column j are positive if the $i^{th}$ service takes the $j^{th}$ Datatype as input, and negative if it is an output.  The magnitude of the entry is 1 times the degree of input/output files of the given type.
 \newpage
 \begin{table}
 \centering
 \begin{tabular}{1|1 1 1 1}
 \toprule
-$\mathbb{W}$ & d_{0} & d_{1} & \cdots & d_{N} \\
+$\mathbb{W}$ & \rho{}_{0} & \rho{}_{1} & \cdots & \rho{}_{N} \\
 \hline
-\rho{}_{0} & \omega_{1,1}    & \cdots                 & \cdots                 & \omega_{1,N} \\
-\rho{}_{1} & \vdots          & \omega_{m,n}           & \reflectbox{$\ddots$}  & \vdots \\
+d_{0}      & \omega_{1,1}    & \cdots                 & \cdots                 & \omega_{1,N} \\
+d_{1}      & \vdots          & \omega_{m,n}           & \reflectbox{$\ddots$}  & \vdots \\
 \vdots     & \vdots          & \reflectbox{$\ddots$}  & \ddots                 & \vdots \\
-\rho{}_{M} & \omega_{M,1}    & \cdots                 & \cdots                 & \omega_{M,N} \\
+d_{M}      & \omega_{M,1}    & \cdots                 & \cdots                 & \omega_{M,N} \\
 \bottomrule
 \end{tabular}
 \caption{Service Production Oriented Incidence Matrix}
@@ -204,6 +204,13 @@ We can determine if all nodes within a submatrix of an oriented incident matrix 
 \lambda_{2} > 0 \Leftrightarrow \mbox{connected}
 \label{eq:eigenvalues}
 \end{equation}
+%
+Of course, we may also compute the transitive closure from the adjacency matrix.
+\begin{equation} 
+\mathbb{C}^{*} = \left( \mathbb{A} + \mathbb{I}_{N \times N} \right)^{N}
+\label{eq:characteristicPolynomial}
+\end{equation}
+%
 %
 \begin{algorithm}
 \caption{Connected}

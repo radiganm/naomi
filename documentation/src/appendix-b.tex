@@ -1,0 +1,137 @@
+%% appendix-b.tex
+%% Mac Radigan
+\documentclass{article}[11pt]
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\usepackage{setspace}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in,nohead]{geometry}
+\usepackage{graphicx,amssymb,amstext,amsmath,amsthm,caption,mathtools}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{csvtools}
+\usepackage{pdftexcmds}
+\usepackage{minted}
+\usepackage{fancyvrb}
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{}{}
+\bibliographystyle{IEEEtran}
+\newcommand\Quote[1]{\lq\textsl{#1}\rq}
+\newcommand\fr[2]{{\textstyle\frac{#1}{#2}}}
+\newcommand{\ssection}[1]{\section[#1]{\centering\normalfont\scshape #1}}
+\newcommand{\ssubsection}[1]{\subsection[#1]{\raggedright\normalfont\itshape #1}}
+\begin{document}
+%\doublespacing
+\section{Appendix B: Source Code}
+\subsection{Appendix B.1: NAOMI Core Sources}
+\subsection{Appendix B.1.1: NAOMI Core Interfaces}
+\inputminted[frame=single,label=NaomiActivator.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/service/NaomiActivator.groovy}
+\inputminted[frame=single,label=Factory.java]{java}{../naomi/src/main/java/org/radigan/naomi/service/Factory.java}
+\inputminted[frame=single,label=Module.java]{java}{../naomi/src/main/java/org/radigan/naomi/service/Module.java}
+\inputminted[frame=single,label=Naomi.java]{java}{../naomi/src/main/java/org/radigan/naomi/service/Naomi.java}
+\inputminted[frame=single,label=TypesDatabase.java]{java}{../naomi/src/main/java/org/radigan/naomi/service/TypesDatabase.java}
+\subsection{Appendix B.1.2: NAOMI Core Implementations}
+\inputminted[frame=single,label=NaomiImpl.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/impl/NaomiImpl.groovy}
+\inputminted[frame=single,label=TypesDatabaseImpl.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/impl/TypesDatabaseImpl.groovy}
+\inputminted[frame=single,label=DatabaseParser.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/utilities/DatabaseParser.groovy}
+\inputminted[frame=single,label=ServiceFactory.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/utilities/ServiceFactory.groovy}
+\inputminted[frame=single,label=TypesCategory.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/utilities/TypeCategory.groovy}
+\subsection{Appendix B.2: ROAR Sources}
+\subsection{Appendix B.2.1: ROAR Interfaces}
+\inputminted[frame=single,label=Resource.java]{java}{../naomi/src/main/java/org/radigan/naomi/roar/service/Resource.java}
+\inputminted[frame=single,label=AbstractResource.java]{java}{../naomi/src/main/groovy/org/radigan/naomi/roar/service/AbstractResource.groovy}
+\inputminted[frame=single,label=Roar.java]{java}{../naomi/src/main/java/org/radigan/naomi/roar/service/Roar.java}
+\subsection{Appendix B.2.2: ROAR Implementations}
+\inputminted[frame=single,label=InterfaceResource.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/roar/impl/InterfaceResource.groovy}
+\inputminted[frame=single,label=RoarImpl.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/roar/impl/RoarImpl.groovy}
+\inputminted[frame=single,label=RoarServlet.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/roar/impl/RoarServlet.groovy}
+\subsection{Appendix B.3: WUMPUS Sources}
+\subsection{Appendix B.3.1: WUMPUS Interfaces}
+\inputminted[frame=single,label=Wumpus.java]{java}{../naomi/src/main/java/org/radigan/naomi/wumpus/service/Wumpus.java}
+\inputminted[frame=single,label=Functor.java]{java}{../naomi/src/main/java/org/radigan/naomi/wumpus/service/Functor.java}
+\inputminted[frame=single,label=AbstractFunctor.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/wumpus/service/AbstractFunctor.groovy}
+\inputminted[frame=single,label=FunctorList.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/wumpus/service/FunctorList.groovy}
+\subsection{Appendix B.3.2: WUMPUS Implementations}
+\inputminted[frame=single,label=SimulationFunctor.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/wumpus/impl/SimulationFunctor.groovy}
+\inputminted[frame=single,label=WumpusImpl.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/wumpus/impl/WumpusImpl.groovy}
+\inputminted[frame=single,label=WumpusUtil.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/wumpus/utilities/WumpusUtil.groovy}
+\subsection{Appendix B.4: NYANCAT Sources}
+\subsection{Appendix B.4.1: NYANCAT Interfaces}
+\inputminted[frame=single,label=Report.java]{java}{../naomi/src/main/java/org/radigan/naomi/nyancat/service/Report.java}
+\inputminted[frame=single,label=AbstractReport.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/nyancat/service/AbstractReport.groovy}
+\subsection{Appendix B.4.1: NYANCAT Implementations}
+\inputminted[frame=single,label=GraphvizReport.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/nyancat/impl/GraphvizReport.groovy}
+\inputminted[frame=single,label=OctaveReport.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/nyancat/impl/OctaveReport.groovy}
+\inputminted[frame=single,label=WumpusReport.groovy]{python}{../naomi/src/main/groovy/org/radigan/naomi/nyancat/impl/WumpusReport.groovy}
+\subsection{Appendix B.4.3: NYANCAT Resources}
+\inputminted[frame=single,label=graphviz.dot]{bash}{../naomi/src/main/resources/org/radigan/naomi/data/reports/graphviz.dot}
+\inputminted[frame=single,label=octave.m]{matlab}{../naomi/src/main/resources/org/radigan/naomi/data/reports/octave.m}
+\inputminted[frame=single,label=wumpus.html]{html}{../naomi/src/main/resources/org/radigan/naomi/data/reports/wumpus.html}
+\subsection{Appendix B.5: RUTH Sources}
+\subsection{Appendix B.5.1: RUTH Interfaces}
+\subsection{Appendix B.5.2: RUTH Implementations}
+\subsection{Appendix B.6: Base Sources}
+\subsection{Appendix B.6.1: Base Interfaces}
+\inputminted[frame=single,label=Tool.java]{java}{../naomi/src/main/java/org/radigan/system/tools/Tool.java}
+\inputminted[frame=single,label=Matrix.java]{java}{../naomi/src/main/java/org/radigan/system/utilities/Matrix.java}
+\subsection{Appendix B.6.2: Base Implementations}
+\inputminted[frame=single,label=MatrixImpl.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/MatrixImpl.groovy}
+\inputminted[frame=single,label=ClojureTool.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/interpreter/ClojureTool.groovy.DISABLED}
+\inputminted[frame=single,label=ScriptTool.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/interpreter/ScriptTool.groovy}
+\inputminted[frame=single,label=Configuration.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/configuration/Configuration.groovy}
+\inputminted[frame=single,label=AbstractTool.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/tools/AbstractTool.groovy}
+\inputminted[frame=single,label=Command.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/tools/Command.groovy}
+\inputminted[frame=single,label=Command2.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/tools/Command2.groovy}
+\inputminted[frame=single,label=Encoder.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Encoder.groovy}
+\inputminted[frame=single,label=Entropy.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Entropy.groovy}
+\inputminted[frame=single,label=FileCollection.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/FileCollection.groovy}
+\inputminted[frame=single,label=Md5.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Md5.groovy}
+\inputminted[frame=single,label=Record.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Record.groovy}
+\inputminted[frame=single,label=Recordset.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/RecordSet.groovy}
+\inputminted[frame=single,label=ResourceManager.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/ResourceManager.groovy}
+\inputminted[frame=single,label=Rot13.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Rot13.groovy}
+\inputminted[frame=single,label=Shell.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Shell.groovy}
+\inputminted[frame=single,label=XmlUtilities.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/XmlUtilities.groovy}
+\inputminted[frame=single,label=Xsp.groovy]{python}{../naomi/src/main/groovy/org/radigan/system/utilities/Xsp.groovy}
+\subsection{Appendix B.7: NAOMI Configuration Sources}
+\inputminted[frame=single,label=datatypes.xml]{xml}{../dist/config/datatypes.xml}
+\inputminted[frame=single,label=logging.properties]{bash}{../dist/config/logging.properties}
+\inputminted[frame=single,label=naomi.conf]{python}{../dist/config/naomi.conf}
+\subsection{Appendix B.8: Build Sources and Packaging}
+\inputminted[frame=single,label=pom.xml (NAOMI Project)]{xml}{../naomi/pom.xml}
+\inputminted[frame=single,label=pom.xml (NAOMI Bundle)]{xml}{../naomi/pom.xml}
+\inputminted[frame=single,label=MANIFEST.MF]{bash}{../naomi/src/main/resources/META-INF/MANIFEST.MF}
+\inputminted[frame=single,label=org.radigan.naomi.service.Module]{bash}{../naomi/src/main/resources/META-INF/services/org.radigan.naomi.service.Module}
+\inputminted[frame=single,label=org.radigan.system.tools.AbstractTool]{bash}{../naomi/src/main/resources/META-INF/services/org.radigan.system.tools.AbstractTool}
+\subsection{Appendix B.9: Distributable Sources}
+\inputminted[frame=single,label=naomi.vbs]{bash}{../dist/bin/naomi.vbs}
+\inputminted[frame=single,label=application.xml]{python}{../dist/deploy/application.naomi}
+\inputminted[frame=single,label=naomi-features.xml]{xml}{../dist/deploy/naomi-features.xml}
+\inputminted[frame=single,label=naomi.conf]{python}{../dist/config/naomi.conf}
+\inputminted[frame=single,label=naomi.cfg]{bash}{../dist/deploy/naomi.cfg}
+\subsection{Appendix B.10: Resource Files and Branding}
+\inputminted[frame=single,label=org.radigan.system.tools.Tool]{bash}{../naomi/src/main/resources/META-INF/services/org.radigan.system.tools.Tool}
+\inputminted[frame=single,label=branding.properties]{bash}{../naomi/src/main/resources/org/apache/karaf/branding/branding.properties}
+\inputminted[frame=single,label=nyancat.ascii]{bash}{../naomi/src/main/resources/org/radigan/naomi/data/ascii/nyancat.ascii}
+\inputminted[frame=single,label=wumpus.ascii]{bash}{../naomi/src/main/resources/org/radigan/naomi/data/ascii/wumpus.ascii}
+\inputminted[frame=single,label=wumpus-face.ascii]{bash}{../naomi/src/main/resources/org/radigan/naomi/data/ascii/wumpus-face.ascii}
+\subsection{Appendix B.7: Unit Tests and Control Scripts}
+\inputminted[frame=single,label=config.ncs]{python}{../scripts/conig.ncs}
+\inputminted[frame=single,label=matrix.ncs]{python}{../scripts/matrix.ncs}
+\inputminted[frame=single,label=module.ncs]{python}{../scripts/module.ncs}
+\inputminted[frame=single,label=naomi.ncs]{python}{../scripts/naomi.ncs}
+\inputminted[frame=single,label=nyancat.ncs]{python}{../scripts/nyancat.ncs}
+\inputminted[frame=single,label=request.ncs]{python}{../scripts/request.ncs}
+\inputminted[frame=single,label=roar.ncs]{python}{../scripts/roar.ncs}
+\inputminted[frame=single,label=types.ncs]{python}{../scripts/types.ncs}
+\inputminted[frame=single,label=wumpus.ncs]{python}{../scripts/wumpus.ncs}
+\inputminted[frame=single,label=wumpusutil.ncs]{python}{../scripts/wumpusutil.ncs}
+\subsection{Appendix B.11: Octave/Matlab Sources}
+\inputminted[frame=single,label=exercises.m]{matlab}{../octave/exercises.m}
+\inputminted[frame=single,label=wumpus.m]{matlab}{../octave/wumpus.m}
+\inputminted[frame=single,label=wumpusEval.m]{matlab}{../octave/wumpusEval.m}
+\inputminted[frame=single,label=wumpusExec.m]{matlab}{../octave/wumpusExec.m}
+\inputminted[frame=single,label=wumpusRes.m]{matlab}{../octave/wumpusRes.m}
+\inputminted[frame=single,label=wumpusValidate.m]{matlab}{../octave/wumpusValidate.m}
+\end{document}
+%% *EOF*
