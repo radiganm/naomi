@@ -1,23 +1,64 @@
 // nyancat.ncs
 // Mac Radigan
 
-import org.radigan.naomi.wumpus.service.SimulationFunctor as F
+import org.radigan.naomi.wumpus.impl.SimulationFunctor as F
 import org.radigan.naomi.wumpus.utilities.WumpusUtil as Util
 import org.radigan.naomi.nyancat.impl.GraphvizReport
+import org.apache.commons.io.FileUtils
 
-def fn = []
-fn << new F('p1', ['d1'],           [],               ['a1','a2','a3'])
-fn << new F('p2', ['d2','d3','d3'], ['d1'],           ['a1','a2','a3'])
-fn << new F('p3', ['d4'],           ['d2','d3','d3'], ['a1','a2','a3'])
-fn << new F('p4', ['d5'],           ['d2'],           ['a1','a2','a3'])
+def f = []
+// sources 01-09
+f << new F('p1',  ['d1','d2','d3','d4'], [],                                            ['a1','a2','a3'])
+f << new F('p2',  ['d5'],                [],                                            ['a51','a52','a53'])
+f << new F('p3',  ['d6'],                [],                                            ['a61','a62'])
+f << new F('p4',  ['d7'],                [],                                            ['a41','a42'])
+f << new F('p5',  ['d8'],                [],                                            ['a41','a42'])
+// functors A 11-19
+f << new F('p11', ['d11'],               ['d1','d2','d3','d4'],                         ['a1','a2','a3'])
+f << new F('p12', ['d12'],               ['d5'],                                        ['a12'])
+f << new F('p13', ['d13'],               ['d6'],                                        ['a13'])
+f << new F('p14', ['d14'],               ['d7','d7'],                                   ['a14'])
+f << new F('p15', ['d15'],               ['d8'],                                        ['a14'])
+// functors B 21-29
+f << new F('p21', ['d21'],               ['d11'],                                       ['a1','a2','a3'])
+f << new F('p22', ['d22'],               ['d12'],                                       ['a1','a8'])
+f << new F('p23', ['d23'],               ['d13'],                                       ['a61','a67'])
+f << new F('p24', ['d24'],               ['d13'],                                       ['a61','a67'])
+f << new F('p25', ['d25'],               ['d15','d15'],                                 ['a71','a77'])
+// sinks 31+
+f << new F('p31', ['d31'],               ['d21'],                                       ['a1','a2','a3'])
+f << new F('p32', ['d32','d33'],         ['d22'],                                       ['a15'])
+f << new F('p33', ['d32','d33','d39'],   ['d23'],                                       ['a30'])
+f << new F('p34', ['d34'],               ['d1','d2','d3','d4','d5'],                    ['a31'])
+f << new F('p35', ['d35'],               ['d1','d2','d3','d4','d1','d2','d3','d4'],     ['a31'])
+f << new F('p36', ['d36'],               ['d6','d6'],                                   ['a36'])
+f << new F('p37', ['d37'],               ['d13','d13'],                                 ['a37'])
+f << new F('p38', ['d38','d39','d40'],   ['d1','d2','d3','d4','d5','d13','d13'],        ['a37','a38','a39'])
+f << new F('p39', ['d39','d40','d41'],   ['d25','d14'],                                 ['a47','a48'])
 
-def wu = new Util(fn)
-wu = wu.filter(2)
-println wu
+def wu = new Util(f)
+def ext = "gif"
 
-def graph = new GraphvizReport(wu)
-graph.setFormat("gif")
-println graph.toString()
-graph.save("/Users/mac/temp/test.gif")
+process = { name ->
+  def n = wu.getFunctorIndex(name, 'ns1')
+  def fn = f[n]
+  def wf = wu.filter(n as int)
+  println wf
+  def cacheDir = new File("/Users/mac/temp/cache")
+  def resDir = new File("${cacheDir}/${fn.getNamespace()}/${fn.getName()}/${wu.getId()}")
+  def rptFile = new File("${resDir}/${fn.getName()}.${ext}")
+  def report = new GraphvizReport(wf)
+  println report.toString()
+  if(!rptFile.exists()) {
+    FileUtils.forceMkdir(resDir)
+    report.save(rptFile, ext)
+    println report.toString()
+    println "file complete: ${rptFile}"
+  } else {
+    println "file exists: ${rptFile}"
+  }
+}
+
+['p39'].each { name -> process(name) }
 
 // *EOF*

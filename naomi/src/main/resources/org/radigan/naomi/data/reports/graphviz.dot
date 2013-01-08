@@ -24,25 +24,29 @@ digraph G {
  nodesep=0.5;
  rankdir=LR;
 
+// sinks
  subgraph cluster_sinks {
   label = "sinks";
 <% sinks.each { n -> %> f${n} [label="${f[n].getName()}", fillcolor=green, style="rounded,filled", shape=doublecircle];
 <% } %>
  }
 
+// functors
  subgraph cluster_functors {
   label = "functors";
 <% functors.each { n -> %> f${n} [label="${f[n].getName()}", fillcolor=darkslategray1, style="filled", shape=square];
 <% } %>
  }
 
+// sources
  subgraph cluster_sources {
 <% sources.each { n -> %> label = "sources";
   f${n} [label="${f[n].getName()}", fillcolor=yellow, style="rounded,filled", shape=doublecircle];
 <% } %>
  }
 
-<% (sources+sinks+functors).each { n -> %> f${ei[n]} -> f${eo[n]} [label="${ename[n]}"];
+// edges
+<% ename.eachWithIndex { e, n -> %> f${ei[n]} -> f${eo[n]} [label="${e}"];
 <% } %>
 
 }

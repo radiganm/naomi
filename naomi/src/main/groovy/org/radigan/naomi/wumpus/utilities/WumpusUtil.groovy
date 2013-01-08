@@ -67,7 +67,8 @@ public class WumpusUtil {
     def edg = []
     for(fd in 0 .. f.size()-1) {
       for(fp in 0 .. f.size()-1) {
-        f[fd].getDependencies().unique().each { dn ->
+        //f[fd].getDependencies().unique().each { dn ->
+        f[fd].getDependencies().each { dn ->
           def deg = f[fp].getProducts().count{it==dn}
           if(deg) edg << [fd, fp, deg, dn]
         }
@@ -84,8 +85,13 @@ public class WumpusUtil {
   }
 
   public WumpusUtil filter(int n) {
-    def tempW = w.sub(traverse(n,-1).reverse(), w.getColRange())
-    return new WumpusUtil(tempW, f, e)
+    def retF = []
+    traverse(n,-1).each { ind -> retF << f[ind] }
+    def tempF = f.clone()
+    tempF.retainAll(retF)
+    return new WumpusUtil(tempF)
+    //def tempW = w.sub(traverse(n,-1).reverse(), w.getColRange())
+    //return new WumpusUtil(tempW, tempF, e)
   }
 
   public List<Integer> traverse(int n, int flux) {

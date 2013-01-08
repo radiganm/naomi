@@ -6,13 +6,23 @@ import org.radigan.naomi.wumpus.utilities.WumpusUtil as Util
 import java.util.concurrent.atomic.AtomicIntegerArray
 import org.radigan.system.utilities.MatrixImpl
 
-def fn = []
-fn << new F('p1', ['d1'],           [],               ['a1','a2','a3'])
-fn << new F('p2', ['d2','d3','d3'], ['d1'],           ['a1','a2','a3'])
-fn << new F('p3', ['d4'],           ['d2','d3','d3'], ['a1','a2','a3'])
-fn << new F('p4', ['d5'],           ['d2'],           ['a1','a2','a3'])
+def f = []
+// sources 01-09
+f << new F('p1',  ['d1','d2','d3','d4'], [],                             ['a1','a2','a3'])
+f << new F('p2',  ['d5'],                [],                             ['a1','a2','a3'])
+f << new F('p3',  ['d6'],                [],                             ['a1','a2','a3'])
+// functors A 11-19
+f << new F('p11', ['d11'],               ['d1','d2','d3','d4'],          ['a1','a2','a3'])
+f << new F('p12', ['d12'],               ['d5'],                         ['a1','a2','a3'])
+f << new F('p13', ['d13'],               ['d6'],                         ['a1','a2','a3'])
+// functors B 21-29
+f << new F('p21', ['d21'],               ['d11'],                        ['a1','a2','a3'])
+f << new F('p22', ['d22'],               ['d12'],                        ['a1','a2','a3'])
+f << new F('p23', ['d23'],               ['d13'],                        ['a1','a2','a3'])
+// sinks 31+
+f << new F('p31', ['d31'],               ['d21'],                        ['a1','a2','a3'])
 
-def wu = new Util(fn)
+def wu = new Util(f)
 println wu
 
 println "state vector"
@@ -29,12 +39,14 @@ tp << Thread.start { println "a" }
 tp << Thread.start { println "b" }
 tp*.join()
 
-wu = wu.filter(2)
-println wu
+def n = wu.getFunctorIndex('p31', 'ns1')
+def fn = f[n]
+def wf = wu.filter(n as int)
+println wf
 
 println "workflow:"
-wu.execute()
+wf.execute()
 
-println "\nsinks: ${wu.getSinks()}"
+println "\nsinks: ${wf.getSinks()}"
 
 // *EOF*
