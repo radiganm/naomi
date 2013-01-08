@@ -34,7 +34,7 @@ public class InterfaceResource extends AbstractResource {
     def map = [:]
     def path = uri.toString()
     if(path.startsWith("/roar/")) {
-      def matcher = path=~/\/roar\/([A-z][A-z0-9]*)\/([A-z][A-z0-9]*)\/([A-z]+)\/([A-z][A-z0-9]*)\.(gif|dot|xml|xsl|xsd|xhtml|html|m)/
+      def matcher = path=~/\/roar\/([A-z][A-z0-9]*)\/([A-z][A-z0-9]*)\/([A-z]+)\/([A-z][A-z0-9]*)\.(gif|dot|xml|xsl|xsd|xhtml|html|m|hdf)/
       if(matcher.matches()) {
         map['namespace'] = matcher[0][1]
         map['nameDir'] = matcher[0][2]
