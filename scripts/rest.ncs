@@ -1,0 +1,57 @@
+// rest.ncs
+// Mac Radigan
+
+def compile = { pattern ->
+  def re = pattern
+  def map = [:]
+  def match = pattern=~/(\$\{[A-z0-9:]+\})/
+  if(match) { match.each { m -> 
+    def (name,type) = m[0].replaceAll('[${}]',"").tokenize(':').reverse() 
+    def rex = ''
+    def clazz = String.class
+    switch(type) {
+      case ['i']:
+        rex = '([0-9]+)'
+        clazz = Integer.class
+        break
+      case [null,'s']:
+        rex = '([A-z0-9_:]+)'
+        clazz = String.class
+        break
+      default:
+        throw new IllegalArgumentException("Illegal control character: '${type}'")
+    } 
+    map[name] = clazz
+    re = re.replace(m[0], rex)
+  } }
+  return [re, map]
+}
+
+def parse = { type, remap, path ->
+  def rval = [:]
+  def (re,map) = remap
+  def ind = 1
+  def match = path=~/${re}/
+  if(match) { 
+    rval['T'] = type
+    map.each { k, v -> rval[k] = v.newInstance(match[0][ind++]) }
+  }
+  return rval
+}
+
+def uri = new URI('http://host:1234/roar/abc/def/ghi/101/jkl.ext')
+def path = uri.getPath()
+
+def pattern = '/roar/abc/${s:var1}/${var2}/${i:var3}/jkl.ext'
+def remap = compile(pattern)
+def map = parse('test1', remap, path)
+
+println "uri: ${path}"
+println "remap: ${remap}"
+println "map: ${map}"
+
+map.each { k, v ->
+  println "$k := $v"
+}
+
+// *EOF*

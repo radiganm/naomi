@@ -29,39 +29,50 @@ public class InterfaceResource extends AbstractResource {
     wu = util['wu']
     cacheDir = util['cache']
   }
-  public void initialize() { }
-  protected Map<String,String> parse(URI uri) { 
-    def map = [:]
-    def path = uri.toString()
-    if(path.startsWith("/roar/")) {
-      def matcher = path=~/\/roar\/([A-z][A-z0-9]*)\/([A-z][A-z0-9]*)\/([A-z]+)\/([A-z][A-z0-9]*)\.(gif|dot|xml|xsl|xsd|xhtml|html|m|hdf)/
-      if(matcher.matches()) {
-        map['namespace'] = matcher[0][1]
-        map['nameDir'] = matcher[0][2]
-        map['cat'] = matcher[0][3]
-        map['name'] = matcher[0][4]
-        map['ext'] = matcher[0][5]
-        if(map['name']!=map['nameDir']) return []
-        if(!(map['cat'] in ['interface', 'style'])) return []
-        return map
-      } else {
-        return map
-      }
-    }
-    return []
+  public void initialize() { 
+    mapRestGet('resource', '/roar/${name}.${ext}')
+    mapRestGet('functor', '/roar/${namespace}/${name}/${category}/${fname}.${ext}')
   }
   public boolean canDecode(URI uri) { 
-    def map = parse(uri)
-    if(map.size()>0) {
-      def index = wu.getFunctorIndex(map['name'], map['namespace'])
-      return (null!=index)
+    def path = uri.toString()
+    def map = restGet(path)
+    switch(map['T']) {
+      case 'resource':
+        return true
+      case 'functor':
+        if(map['name']!=map['fname']) return false
+        if(map.size()>0) {
+          def index = wu.getFunctorIndex(map['name'], map['namespace'])
+          return (null!=index)
+        }
+        return false
+      default:
+        return false
     }
   }
   public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     def uri = new URI(req.getRequestURI())
-    def map = parse(uri)
-    switch(map['cat']) {
-      case 'interface':
+    def map = restGet(uri.toString())
+    switch(map['T']) {
+      case 'resource':
+        switch(map['ext']) {
+          case 'ico':
+            OutputStream output = res.getOutputStream()
+            def filename = new File(uri.getPath()).getName()
+            res.setContentType("image/ico")
+            res.setHeader('Content-Transfer-Encoding', 'binary')
+            res.setHeader('Content-Disposition','attachment; filename="${filename}"' as String)
+            def resourcePath = "/org/radigan/naomi/data/images/${filename}"
+            def input = getClass().getResourceAsStream(resourcePath)
+            IOUtils.copy(input as InputStream, output)
+            IOUtils.closeQuietly(input)
+            IOUtils.closeQuietly(output)
+            break
+          default:
+            throw new IllegalStateException("Invalid name: ${map['name']}")
+        }
+        break
+      case 'functor':
         def resDir = new File("${cacheDir}/${map['namespace']}/${map['name']}/${wu.getId()}")
         def fn = wu.getFunctorIndex(map['name'], map['namespace'])
         def wf = wu.filter(fn as int)
@@ -97,10 +108,8 @@ public class InterfaceResource extends AbstractResource {
             throw new IllegalStateException("Invalid extension: ${map['ext']}")
         }
         break
-      case 'style':
-        break
       default:
-        throw new IllegalStateException("Invalid category: ${map['cat']}")
+        throw new IllegalStateException("Invalid type: ${map['type']}")
     }
   }
 }
