@@ -67,9 +67,9 @@ public class WumpusUtil {
     def edg = []
     for(fd in 0 .. f.size()-1) {
       for(fp in 0 .. f.size()-1) {
-        //f[fd].getDependencies().unique().each { dn ->
-        f[fd].getDependencies().each { dn ->
-          def deg = f[fp].getProducts().count{it==dn}
+        //f[fd].getDependencySignature().unique().each { dn ->
+        f[fd].getDependencySignature().each { dn ->
+          def deg = f[fp].getProductSignature().count{it==dn}
           if(deg) edg << [fd, fp, deg, dn]
         }
       }

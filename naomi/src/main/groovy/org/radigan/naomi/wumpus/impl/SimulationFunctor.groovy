@@ -8,28 +8,54 @@ import org.radigan.naomi.wumpus.service.AbstractFunctor
 
 public class SimulationFunctor extends AbstractFunctor {
   def log = Logger.getLogger(SimulationFunctor.class)
-  def namespace = DEFAULT_NAMESPACE
-  def name = ""
-  def dependencies = []
-  def products = []
-  def parameters = []
   public SimulationFunctor() {} // SPI support
   public SimulationFunctor(
     String name, 
-    List<String> products,
-    List<String> dependencies,
-    List<String> parameters) {
+    List<String> prods,
+    List<String> deps,
+    List<String> params) {
+    this.namespace = DEFAULT_NAMESPACE
     this.name = name
-    this.dependencies = dependencies
-    this.products = products
-    this.parameters = parameters
+    deps.eachWithIndex { type, index -> 
+      this.dependencies[TYPE] = type
+      this.dependencies[NAME] = "p${index}"
+    }
+    prods.eachWithIndex { prod, index -> 
+      this.products[TYPE] = prod
+      this.products[NAME] = "p${index}"
+    }
+    params.eachWithIndex { param, index -> 
+      this.parameters[TYPE] = param
+      this.parameters[NAME] = "a${index}"
+    }
   }
   public SimulationFunctor(
     String namespace, 
     String name, 
-    List<String> products,
-    List<String> dependencies,
-    List<String> parameters) {
+    List<String> prods,
+    List<String> deps,
+    List<String> params) {
+    this.namespace = namespace
+    this.name = name
+    deps.eachWithIndex { type, index -> 
+      this.dependencies[TYPE] = type
+      this.dependencies[NAME] = "p${index}"
+    }
+    prods.eachWithIndex { prod, index -> 
+      this.products[TYPE] = prod
+      this.products[NAME] = "p${index}"
+    }
+    params.eachWithIndex { param, index -> 
+      this.parameters[TYPE] = param
+      this.parameters[NAME] = "a${index}"
+    }
+  }
+  public SimulationFunctor(
+    String namespace, 
+    String name, 
+    Map<String,Map<String,String> > products,
+    Map<String,Map<String,String> > dependencies,
+    Map<String,Map<String,String> > parameters) {
     this.namespace = namespace
     this.name = name
     this.dependencies = dependencies
@@ -38,26 +64,8 @@ public class SimulationFunctor extends AbstractFunctor {
   }
   public void initialize() {
   }
-  public String getNamespace() {
-    return namespace
-  }
-  public String getName() {
-    return name
-  }
-  public String getQname() {
-    return "${namespace}:${name}"
-  }
-  public List<String> getProducts() {
-    return products
-  }
-  public List<String> getParameters() {
-    return parameters
-  }
-  public List<String> getDependencies() {
-    return dependencies
-  }
   public void call(Map<String,String> parameters) throws RuntimeException {
-    log.info("calling ${getName()} with parameters: ${parameters}")
+    log.info("calling ${getName()} with parameters: {parameters}")
   }
 }
 

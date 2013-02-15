@@ -16,10 +16,10 @@
   wfid = util.getId()
   getFunction = { f ->
     def sb = new StringBuffer()
-    sb << "\\left(${f.getProducts().join(', ')}\\right)"
+    sb << "\\left(${f.getProductSignature().join(', ')}\\right)"
     sb << "& \\leftarrow \\left( ${f.getQname()}, "
-    sb << "\\{ ${f.getDependencies().join(', ')} \\}, "
-    sb << "\\{ ${f.getParameters().join(', ')} \\}"
+    sb << "\\{ ${f.getDependencySignature().join(', ')} \\}, "
+    sb << "\\{ ${f.getParameterSignature().join(', ')} \\}"
     sb << "\\right)"
     return sb.toString()
   }
@@ -90,11 +90,11 @@
         <br>
         Unique Id: ${wfid}
         <br>
-        Products: ${fn.getProducts().join(", ")}
+        Products: ${fn.getProductSignature().join(", ")}
         <br>
-        Dependencies: ${fn.getDependencies().join(", ")}
+        Dependencies: ${fn.getDependencySignature().join(", ")}
         <br>
-        Parameters: ${fn.getParameters().join(", ")}
+        Parameters: ${fn.getParameterSignature().join(", ")}
         <br>
         Algebraic Connectivity: ${util.getAlgebraicConnectivity()}
         <br>
