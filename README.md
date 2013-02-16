@@ -17,7 +17,8 @@
 ## Screenshots
 
 ### Console Interface
-![Karaf Console](http://farm9.staticflickr.com/8111/8475565094_cc1f8bcbdd_b.jpg "Karaf Console")
+![Karaf Console](http://farm9.staticflickr.com/8232/8475565096_daf19c66a3_b.jpg "Karaf Console")
+
 
 ### OSGi Compliant
 ![OSGi Bundles](http://farm9.staticflickr.com/8111/8475565094_cc1f8bcbdd_b.jpg "OSGi Bundles")
