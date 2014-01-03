@@ -1,5 +1,0 @@
---2014-01-03 00:23:48--  https://github-camo.global.ssl.fastly.net/3bc41ad3bddeb0abb3fe0cabb750b9f2c3fa8264/687474703a2f2f6661726d392e737461746963666c69636b722e636f6d2f383131302f383437353536343837385f313463373566353938395f622e6a7067
-Resolving github-camo.global.ssl.fastly.net... 199.27.79.184, 199.27.77.184
-Connecting to github-camo.global.ssl.fastly.net|199.27.79.184|:443... connected.
-ERROR: certificate common name “*.a.ssl.fastly.net” doesn’t match requested host name “github-camo.global.ssl.fastly.net”.
-To connect to github-camo.global.ssl.fastly.net insecurely, use ‘--no-check-certificate’.
