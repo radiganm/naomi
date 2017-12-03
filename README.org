@@ -2,7 +2,7 @@
 
 #+CAPTION: NAOMI
 #+AUTHOR: Mac Radigan
-#+PROJECT-PAGE: http://radiganm.github.com/naomi
+#+PAGE: http://radiganm.github.com/naomi
 
 [[https://raw.github.com/radiganm/naomi/master/documentation/src/images/naomi.jpg]]
 ** Overview
